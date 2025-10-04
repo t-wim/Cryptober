@@ -1,9 +1,0 @@
-node_modules
-.DS_Store
-dist
-.next
-.vercel
-out
-coverage
-*.log
-# Lockfile wird ab Step 1 erzeugt und versioniert
