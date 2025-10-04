@@ -1,0 +1,29 @@
+﻿@import "tailwindcss";
+
+@theme {
+  --color-white: #ffffff;
+  --color-bg: hsl(240 10% 4%);
+  --color-accent: hsl(140 74% 45%);
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+}
+
+/* Base layout */
+:root { color-scheme: dark; }
+html, body { height: 100%; }
+body { background: var(--color-bg); color: var(--color-white); -webkit-font-smoothing: antialiased; }
+
+/* Small design helpers used across your UI */
+.container { margin-inline: auto; max-width: 72rem; padding-inline: 1rem; }
+.card { border-radius: 1rem; border: 1px solid rgb(255 255 255 / .1); background: rgb(255 255 255 / .05); padding: 1rem; }
+.btn { display:inline-flex; align-items:center; gap:.5rem; border-radius:.75rem; padding:.5rem 1rem; font-weight:500; transition: opacity .2s; }
+.btn-accent { background: color-mix(in oklab, var(--color-accent) 20%, transparent); color: var(--color-accent); border: 1px solid color-mix(in oklab, var(--color-accent) 40%, transparent); }
+.btn-accent:hover { background: color-mix(in oklab, var(--color-accent) 30%, transparent); }
+.muted { color: rgb(255 255 255 / .7); }
+
+/* Focus visibility */
+:where(a, button, [role="button"], input, textarea, select):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: .5rem;
+}
