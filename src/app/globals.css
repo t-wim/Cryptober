@@ -1,0 +1,122 @@
+﻿/* src/app/globals.css */
+@import "tailwindcss";
+
+/* explizite Scan-Pfade (vom Ordner src/app aus) */
+@source "../**/*.{ts,tsx,mdx}";
+
+@theme {
+  --color-ink: #0a0b10;
+  --color-panel: #111318;
+  --color-text: #eaecef;
+  --color-muted: #8a9099;
+  --color-pumpkin: #ff4500;
+  --color-accent: #22c55e;
+  --color-phantom: #8b00ff;
+}
+
+
+/* Base */
+:root { color-scheme: dark; }
+html, body { height: 100%; }
+body {
+  background: var(--color-ink);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fonts mapping */
+.font-ui { font-family: var(--font-ui), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+.font-hero { font-family: var(--font-hero), var(--font-ui), sans-serif; }
+.font-mono { font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+/* Layout helpers */
+.container { margin-inline:auto; max-width:72rem; padding-inline:1rem; }
+.card {
+  border-radius: var(--radius-soft);
+  border: 1px dashed rgba(255,255,255,.15); /* stitching */
+  background: color-mix(in oklab, var(--color-panel) 92%, transparent);
+  padding: 1rem;
+  box-shadow: var(--shadow-neu);
+}
+.btn { display:inline-flex; align-items:center; gap:.5rem; border-radius:.75rem; padding:.5rem 1rem; font-weight:600; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.btn-accent { background: color-mix(in oklab, var(--color-accent) 18%, transparent); color: var(--color-accent); border: 1px solid color-mix(in oklab, var(--color-accent) 40%, transparent); }
+.btn-accent:hover { transform: scale(1.05); box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-accent) 30%, transparent); }
+
+.muted { color: var(--color-muted); }
+
+/* Grain backdrop */
+.bg-grain {
+  position: relative;
+}
+.bg-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 4px, rgba(255,69,0,0.03) 4px 8px);
+  opacity: .6;
+  mix-blend-mode: screen;
+}
+
+/* Glow helpers */
+.glow-phantom { box-shadow: var(--shadow-phantom); }
+.glow-pumpkin { box-shadow: var(--shadow-pumpkin); }
+
+/* Parallax opt-in (subtle) */
+.parallax {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn, .parallax { transition: none !important; transform: none !important; }
+  .bg-grain::before { opacity: .3; }
+}
+
+/* Focus styles */
+:where(a,button,[role="button"],input,textarea,select):focus-visible {
+  outline: 2px solid var(--color-pumpkin);
+  outline-offset: 2px;
+  border-radius: .5rem;
+}
+
+.btn,
+.card {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 10px rgba(255,69,0,.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .card { transition: none !important; transform: none !important; }
+}
+.pixel-grain { position: relative; }
+.pixel-grain::before {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 2px);
+  mix-blend-mode: screen; opacity: .3; border-radius: inherit;
+}
+.crt { background: color-mix(in oklab, var(--color-panel) 90%, transparent); }
+.blink { animation: blink 1s steps(1, end) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.scanlines { position: relative; overflow: hidden; }
+.scanlines::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(180deg, rgba(255,255,255,.04) 0 2px, transparent 2px 4px);
+  opacity: .3; transition: opacity .2s ease;
+}
+.scanlines:hover::after { opacity: .55; }
+
+.marquee {
+  white-space: nowrap; overflow: hidden; border-radius: 8px;
+  border: 1px solid color-mix(in oklab, var(--color-accent) 40%, transparent);
+}
+.marquee::before {
+  content: attr(class); display: none; /* avoid text duplication for a11y */
+}

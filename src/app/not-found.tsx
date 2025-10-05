@@ -1,0 +1,1 @@
+﻿export default function NF(){return <div className="card text-center"><h1 className="text-xl font-semibold mb-1">404  Not found</h1><p className="opacity-70">The page vanished into the pumpkin patch.</p></div>}
